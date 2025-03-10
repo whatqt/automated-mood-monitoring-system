@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = getenv("SECRET_KEY")
-
+AI_API_KEY = getenv("AI_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     #
     'rest_framework',
     "registration",
-    "data_acceptance"
+    "data_acceptance",
+    "data_processing"
 ]
 
 MIDDLEWARE = [

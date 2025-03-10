@@ -12,7 +12,7 @@ class SendData:
         channel.queue_declare(queue="data_for_analysis")
         channel.basic_publish(
             exchange='',
-            routing_key='data_for_analysis',
+            routing_key="data_for_analysis",
             body=self.data
         )
 

@@ -1,3 +1,11 @@
 from django.db import models
+from data_acceptance.models import DataForAnalysis
 
-# Create your models here.
+
+class ResponsesAI(models.Model):
+    data_for_analysis = models.ForeignKey(
+        DataForAnalysis,
+        on_delete=models.CASCADE
+    )
+    feedback = models.TextField()
+

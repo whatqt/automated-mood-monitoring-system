@@ -13,8 +13,12 @@ class DataAcceptance(APIView):
         )
         if serializer.is_valid():
             serializer.save()
-            print(type(serializer.data))
-            send_data = SendData(dumps(serializer.data))
+            data = {
+                "data_for_analysis": serializer.data["id"],
+                "thema": serializer.data["thema"],
+                "msg": serializer.data["msg"]
+            }
+            send_data = SendData(dumps(data))
             send_data.send()
             return Response(
                 {"status": "the data is saved and sended"},
