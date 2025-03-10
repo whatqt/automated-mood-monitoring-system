@@ -3,7 +3,7 @@ from automated_mood_monitoring_system.settings import CONNECTION_RABBITMQ
 
 
 class SendData:
-    def __init__(self, data: dict):
+    def __init__(self, data):
         self.data = data
         self.connection = CONNECTION_RABBITMQ
     
