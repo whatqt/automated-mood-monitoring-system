@@ -6,6 +6,7 @@ from django.contrib.auth import login, authenticate, logout
 from .serializer import RegistrationSerializer, LoginSerializer
 
 
+
 class Registration(APIView):
     def post(self, request: Request):
         serializer = RegistrationSerializer(data=request.data)
@@ -22,7 +23,7 @@ class Login(APIView):
         serializer = LoginSerializer(data=request.data)
         user = serializer.is_valid()
         if user:
-            login(request,user)
+            login(request, user)
             return Response(
                 {"status": "login completed successfully"},
                 status=status.HTTP_202_ACCEPTED
