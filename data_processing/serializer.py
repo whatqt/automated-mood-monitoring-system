@@ -12,3 +12,8 @@ class ProcessingDataSerializer(serializers.ModelSerializer):
         model = ResponsesAI
         fields = ["feedback", "data_for_analysis"]
 
+class GetResponsesAiSerializer(serializers.Serializer):
+    thema = serializers.CharField()
+    msg = serializers.CharField()
+    feedback = serializers.CharField()
+

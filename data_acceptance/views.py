@@ -7,11 +7,17 @@ from .producer import SendData
 from json import dumps
 from rest_framework.permissions import IsAuthenticated
 from automated_mood_monitoring_system.decoratos import insert_user_pk
-
+from .models import DataForAnalysis
 
 class DataAcceptance(APIView):
     permission_classes = [IsAuthenticated]
     
+    def get_queryset(self, username_id):
+        data = DataForAnalysis.objects.filter(
+            username=username_id
+        ).values()
+        return data
+
     @insert_user_pk
     def post(self, request: Request):
         serializer = DataAcceptanceSerializer(
@@ -32,6 +38,18 @@ class DataAcceptance(APIView):
             )
 
         return Response(serializer.errors)
-
-
+    
+    def get(self, request: Request, id=0):
+        data = self.get_queryset(request.user.pk)
+        all_data = []
+        for info in data:
+            serializer = DataAcceptanceSerializer(
+                data=info
+            )
+            if serializer.is_valid():
+                all_data.append(info)
+            else: 
+                return Response(serializer.errors)
+        return Response({"data": all_data})
+        
 # {"thema":"test", "msg":"test"}
