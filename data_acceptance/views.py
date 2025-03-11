@@ -6,6 +6,8 @@ from rest_framework import status
 from .producer import SendData
 from json import dumps
 
+
+
 class DataAcceptance(APIView):
     def post(self, request: Request):
         serializer = DataAcceptanceSerializer(
@@ -19,7 +21,7 @@ class DataAcceptance(APIView):
                 "msg": serializer.data["msg"]
             }
             send_data = SendData(dumps(data))
-            send_data.send()
+            send_data.send()       
             return Response(
                 {"status": "the data is saved and sended"},
                 status=status.HTTP_202_ACCEPTED

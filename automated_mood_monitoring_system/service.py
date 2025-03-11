@@ -8,9 +8,10 @@ class ConnectionRabbitMq:
         try:
             connection = BlockingConnection(
                 ConnectionParameters(
-                    'localhost'
+                    'localhost',
+                    heartbeat=0
                 )
             )
             return connection
         except Exception as e:
-            raise e
+            print(f"Ошибка подключения: {e}")

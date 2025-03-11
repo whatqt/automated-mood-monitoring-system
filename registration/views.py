@@ -10,10 +10,7 @@ class Registration(APIView):
     def post(self, request: Request):
         serializer = RegistrationSerializer(data=request.data)
         if serializer.is_valid():
-            User.objects.create_user(
-                username=serializer.data["username"],
-                password=request.data["password"]
-            )
+            serializer.save()
             return Response(
                 {"status": "User has been successfully created"},
                 status=status.HTTP_201_CREATED

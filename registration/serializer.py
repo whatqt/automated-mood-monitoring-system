@@ -9,6 +9,12 @@ class RegistrationSerializer(serializers.ModelSerializer):
         model = User
         fields = ["username", "password"]
 
+    def save(self):
+        User.objects.create_user(
+            username=self.validated_data["username"],
+            password=self.validated_data["password"]
+        )
+
 class LoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -19,9 +25,6 @@ class LoginSerializer(serializers.ModelSerializer):
             username=self.initial_data["username"],
             password=self.initial_data["password"]
         )
-        # print(self.initial_data["username"])
-        # print(self.initial_data["password"])
-        
         if user: 
             return user
         raise serializers.ValidationError(
