@@ -5,7 +5,7 @@ from .serializer import GetResponsesAiSerializer
 from rest_framework.permissions import IsAuthenticated
 from .models import ResponsesAI
 from data_acceptance.models import DataForAnalysis
-
+from rest_framework import status
 
 
 
@@ -32,4 +32,4 @@ class GetResponsesAi(APIView):
     
     def get(self, request: Request):
         data = self.get_queryset(request.user.pk)
-        return Response(data)
+        return Response(data, status=status.HTTP_302_FOUND)

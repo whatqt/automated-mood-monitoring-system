@@ -23,6 +23,7 @@ class DataAcceptance(APIView):
         serializer = DataAcceptanceSerializer(
             data=request.data
         )
+        print(type(request.data))
         if serializer.is_valid():
             serializer.save()
             data = {
@@ -37,10 +38,14 @@ class DataAcceptance(APIView):
                 status=status.HTTP_202_ACCEPTED
             )
 
-        return Response(serializer.errors)
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
     
     def get(self, request: Request, id=0):
         data = self.get_queryset(request.user.pk)
+        print(data)
         all_data = []
         for info in data:
             serializer = DataAcceptanceSerializer(
@@ -49,7 +54,13 @@ class DataAcceptance(APIView):
             if serializer.is_valid():
                 all_data.append(info)
             else: 
-                return Response(serializer.errors)
-        return Response({"data": all_data})
+                return Response(
+                    serializer.errors, 
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        return Response(
+            {"data": all_data}, 
+            status=status.HTTP_302_FOUND
+        )
         
 # {"thema":"test", "msg":"test"}
