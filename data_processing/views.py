@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import ResponsesAI
 from data_acceptance.models import DataForAnalysis
 from rest_framework import status
-
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class GetResponsesAi(APIView):
@@ -18,7 +18,10 @@ class GetResponsesAi(APIView):
         ).values_list("id", flat=True)
         all_data = []
         for id_data in id_for_analysis:
-            response_ai = ResponsesAI.objects.get(data_for_analysis=id_data)
+            try:
+                response_ai = ResponsesAI.objects.get(data_for_analysis=id_data)
+            except ObjectDoesNotExist:
+                return all_data
             data_for_analysis = DataForAnalysis.objects.filter(id=id_data).get()
             data = {
                 "thema": data_for_analysis.thema,
