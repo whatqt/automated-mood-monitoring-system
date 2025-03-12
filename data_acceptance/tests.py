@@ -29,7 +29,7 @@ class TestDataAcceptance(TestCase):
         mock_send_data.__getitem__.ruturn_value = send_data
         mock_send_data.send.return_value = None
         request = self.factory.post(
-            "/data_acceptance",
+            "/api/v1/data_acceptance",
             dumps(data),
             content_type='application/json'
         )
@@ -42,7 +42,7 @@ class TestDataAcceptance(TestCase):
 
     def test_get(self):
         request = self.factory.get(
-            "/data_acceptance"
+            "/api/v1/data_acceptance"
         )
         request.user = self.user
         view = DataAcceptance.as_view()

@@ -16,7 +16,7 @@ class TestGetResponsesAi(TestCase):
 
     def test_get(self):
         request = self.factory.get(
-            "/responses_ai"
+            "/api/v1/responses_ai"
         )
         request.user = self.user
         view = GetResponsesAi().as_view()
