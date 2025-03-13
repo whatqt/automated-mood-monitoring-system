@@ -13,6 +13,7 @@ class ProcessingDataSerializer(serializers.ModelSerializer):
         fields = ["feedback", "data_for_analysis"]
 
 class GetResponsesAiSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
     thema = serializers.CharField()
     msg = serializers.CharField()
     feedback = serializers.CharField()

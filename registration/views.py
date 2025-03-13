@@ -1,8 +1,7 @@
 from rest_framework.views import APIView, Request
 from rest_framework.response import Response
 from rest_framework import status
-from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login
 from .serializer import RegistrationSerializer, LoginSerializer
 
 
